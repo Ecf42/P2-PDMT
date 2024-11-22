@@ -1,11 +1,12 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React from 'react';
+import { StyleSheet, View } from 'react-native';
+import ListaImagens from './Components/ListaImagens';
 
 export default function App() {
+
   return (
     <View style={styles.container}>
-      <Text>Começo do app de gatinhos</Text>
-      <StatusBar style="auto" />
+      <ListaImagens/>
     </View>
   );
 }
