@@ -1,31 +1,35 @@
-import { useState, useEffect } from 'react';
-import { Image, StyleSheet, View } from 'react-native';
-import theCatApiClient from '../Utils/TheCatApiClient';
 import React from 'react';
-export default function ListaImagens() {
-  const [imagemURL, setImagemURL] = useState<string | null>(null);
-  useEffect(() => {
-    const exibeImagem = async () => {
-        const response = await theCatApiClient.get('search', {params: { limit: 1 }, });
-        const imagem = response.data[0]?.url;
-        setImagemURL(imagem); 
-    };
-    exibeImagem();
-  }, []);
+import { Pressable, StyleSheet, Text, View } from 'react-native';
+import theCatApiClient from '../Utils/TheCatApiClient';
+
+export default function ListaImagens({ setImagens }: { setImagens: (imagens: string[]) => void }) {
+  const carregarImagens = async () => {
+      const response = await theCatApiClient.get('search', { params: { limit: 10 } }); 
+			const novasImagens = response.data.map((item: { url: string }) => item.url); 
+      setImagens(novasImagens);
+  };
+
   return (
     <View style={styles.container}>
-      <Image source={{ uri: imagemURL || undefined }} style={styles.imagem} />
+      <Pressable style={styles.button} onPress={carregarImagens}>
+        <Text style={styles.buttonText}>Gerar Imagens</Text>
+      </Pressable>
     </View>
   );
 }
+
 const styles = StyleSheet.create({
   container: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    margin: 20,
+    flex: 1,
   },
-  imagem: {
-    width: 400,
-    height: 400,
+  button:   {
+    backgroundColor: '#0096F3',
+    padding: 12,
+    borderRadius: 4,
+    margin: 12,
+  },
+  buttonText:   {
+    color: 'white',
+    textAlign: 'center',
   },
 });
