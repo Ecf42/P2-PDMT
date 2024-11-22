@@ -7,8 +7,8 @@ export default function App() {
   const [imagens, setImagens] = useState<string[]>([]);
 
   const carregarImagens = async () => {
-    const response = await theCatApiClient.get('search', { params: { limit: 5 } });
-    const novasImagens = response.data.slice(0, 5).map((item: any) => item.url);
+    const resposta = await theCatApiClient.get('search', { params: { limit: 5 } });
+    const novasImagens = resposta.data.slice(0, 5).map((item: any) => item.url);
     setImagens(novasImagens);
   };
 
@@ -23,7 +23,6 @@ export default function App() {
         </Pressable>
         <FlatList
           data={imagens}
-          keyExtractor={(item, index) => index.toString()}
           renderItem={({ item }) => <Image source={{ uri: item }} style={styles.image} />}
           style={styles.list}
         />
