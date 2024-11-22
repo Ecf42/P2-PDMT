@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { FlatList, Image, Pressable, StyleSheet, Text, View } from 'react-native';
+import { LinearGradient } from 'expo-linear-gradient';
 import theCatApiClient from './Utils/TheCatApiClient';
 
 export default function App() {
@@ -12,33 +13,39 @@ export default function App() {
   };
 
   return (
-    <View style={styles.container}>
-      <Pressable style={styles.button} onPress={carregarImagens}>
-        <Text style={styles.buttonText}>Gerar Imagens</Text>
-      </Pressable>
-      <FlatList
-        data={imagens}
-        keyExtractor={(item, index) => index.toString()}
-        renderItem={({ item }) => <Image source={{ uri: item }} style={styles.image} />}
-        style={styles.list}
-      />
-    </View>
+    <LinearGradient
+      colors={['#ffdfaa', '#ffd3a6', '#ffc6a2', '#f2b99d']} 
+      style={styles.background}
+    >
+      <View style={styles.container}>
+        <Pressable style={styles.button} onPress={carregarImagens}>
+          <Text style={styles.buttonText}>Gerar Imagens</Text>
+        </Pressable>
+        <FlatList
+          data={imagens}
+          keyExtractor={(item, index) => index.toString()}
+          renderItem={({ item }) => <Image source={{ uri: item }} style={styles.image} />}
+          style={styles.list}
+        />
+      </View>
+    </LinearGradient>
   );
 }
 
 const styles = StyleSheet.create({
+  background: {
+    flex: 1,
+  },
   container: {
     flex: 1,
-    backgroundColor: '#F0F0F0',
     alignItems: 'center',
     justifyContent: 'center',
+    padding: 20,
   },
   list: {
     width: '100%',
-    marginTop: 80,
-    borderRadius: 4,
-    padding: 4,
-    alignContent: 'center',
+    marginTop: 20,
+    padding: 10,
   },
   image: {
     width: 500,
@@ -46,15 +53,20 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     borderRadius: 10,
     alignSelf: 'center',
+    borderColor:'#1e3a8a',
+    borderWidth: 5
   },
   button: {
-    backgroundColor: '#0096F3',
+    backgroundColor: '#1e3a8a', 
     padding: 12,
     borderRadius: 4,
-    margin: 12,
+    marginVertical: 10,
+    width: '20%',
+    alignItems: 'center',
   },
   buttonText: {
-    color: 'white',
-    textAlign: 'center',
+    color: 'white', 
+    fontSize: 16,
+    fontWeight: 'bold',
   },
 });
