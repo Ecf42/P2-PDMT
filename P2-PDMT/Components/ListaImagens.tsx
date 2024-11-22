@@ -5,7 +5,7 @@ import theCatApiClient from '../Utils/TheCatApiClient';
 export default function ListaImagens({ setImagens }: { setImagens: (imagens: string[]) => void }) {
   const carregarImagens = async () => {
       const response = await theCatApiClient.get('search', { params: { limit: 10 } }); 
-			const novasImagens = response.data.map((item: { url: string }) => item.url); 
+      const novasImagens = response.data.slice(0, 5).map((item: any) => item.url);
       setImagens(novasImagens);
   };
 

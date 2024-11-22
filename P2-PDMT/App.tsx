@@ -34,9 +34,10 @@ const styles = StyleSheet.create({
     
   },
   image: {
-    width: 300,
-    height: 300,
+    width: 500,
+    height: 400,
     marginBottom: 10,
     borderRadius: 10,
-  },
+    alignSelf: 'center'
+  }
 });
